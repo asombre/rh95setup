@@ -19,11 +19,11 @@ chown qemu:qemu $kvmdir/$vmname.qcow2
 
 echo "creating 10G VM $vmname..."
 virt-install \
---name $vmname \
---memory 4096 \
---vcpus 4 \
---disk $kvmdir/$vmname.qcow2 \
---import \
---os-variant $os_ver
+    --name $vmname \
+    --memory 4096 \
+    --vcpus 4 \
+    --disk $kvmdir/$vmname.qcow2 \
+    --import \
+    --os-variant $os_ver
 
 echo "done"
