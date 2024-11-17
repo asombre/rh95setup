@@ -13,12 +13,12 @@ ksfile=dvdinstall.ks
 kspath=ksdir/$ksfile
 
 virt-install \
-	--name $vmname \
-	--vcpus $cpunum \
-	--memory $memnum \
-	--location $isopath \
-	--disk $diskpath \
-	--initrd-inject $kspath \
-  --extra-args inst.ks="file:/$ksfile console=tty0 console=ttyS0,115200" \
-	--osinfo $os$major.$minor \
-  --nographics 
+    --name $vmname \
+    --vcpus $cpunum \
+    --memory $memnum \
+    --location $isopath \
+    --disk $diskpath \
+    --initrd-inject $kspath \
+    --extra-args inst.ks="file:/$ksfile console=tty0 console=ttyS0,115200" \
+    --osinfo $os$major.$minor \
+    --nographics 
