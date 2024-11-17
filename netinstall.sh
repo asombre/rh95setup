@@ -13,11 +13,11 @@ diskpath=$imgpath/$vmname.qcow2,size=10
 ksfile=netinstall.ks
 
 virt-install \
-	--name $vmname \
-	--vcpus $cpunum \
-	--memory $memnum \
-	--location $pkgpath \
-	--disk $diskpath \
-  --extra-args inst.ks="http://$repoip/kickstarts/$ksfile console=tty0 console=ttyS0,115200" \
-	--osinfo $os$major.$minor \
-  --nographics 
+    --name $vmname \
+    --vcpus $cpunum \
+    --memory $memnum \
+    --location $pkgpath \
+    --disk $diskpath \
+    --extra-args inst.ks="http://$repoip/kickstarts/$ksfile console=tty0 console=ttyS0,115200" \
+    --osinfo $os$major.$minor \
+    --nographics
