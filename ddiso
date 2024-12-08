@@ -1,0 +1,4 @@
+#!/bin/bash
+
+umount /dev/sda1
+dd if=os.iso of=/dev/sda bs=1M status=progress
