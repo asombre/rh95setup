@@ -20,9 +20,10 @@ network  --hostname=newhost.example.com
 # Use CDROM installation media
 cdrom
 
+# @^minimal-environment
+# @standard
 %packages
-@^minimal-environment
-@standard
+@^server-product-environment
 ipa-client
 
 %end
