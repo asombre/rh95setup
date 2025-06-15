@@ -13,6 +13,7 @@ repo --name="AppStream" --baseurl=file:///run/install/sources/mount-0000-cdrom/A
 lang en_US.UTF-8
 
 # Network information
+# bootproto=static gateway, ip, netmask, nameserver, ipv4-dns, ipv4-dns-serach noipv6
 network  --bootproto=dhcp --device=enp1s0 --activate
 network  --hostname=newhost.example.com
 
@@ -22,13 +23,12 @@ cdrom
 %packages
 @^minimal-environment
 @standard
+ipa-client
 
 %end
 
 # Run the Setup Agent on first boot
 firstboot --disable
-# Do not configure the X Window System
-skipx
 
 # Generated using Blivet version 3.6.0
 ignoredisk --only-use=vda
@@ -42,10 +42,25 @@ clearpart --all --initlabel --drives=vda
 timezone America/Denver --utc
 
 # Root password
-#rootpw --allow-ssh --iscrypted  xxxxxxx
-#user --groups=wheel --name=serveradmin --password=xxxx --iscrypted --gecos="Server Administrator"
-
-rootpw --plaintext password6789
-user --groups=wheel --name=serveradmin --plaintext --password=password1234 --gecos="Server Administrator"
+rootpw --allow-ssh --plaintext password1234
+user --groups=wheel --name=localadmin --plaintext --password=password1234 --gecos="Local User"
 
 reboot
+
+%post
+cat >/etc/yum.repos.d/cusom.repo <<EOF
+[appstream]
+baseurl=http://x.x.x.x/AppStream/
+name=AppStream
+enabled=1
+gpgcheck=0
+sslverify=0
+
+[baseos]
+baseurl=http://x.x.x.x/BaseOS/
+name=BaseOS
+enabled=1
+gpgcheck=0
+sslverify=0
+EOF
+%end
