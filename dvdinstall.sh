@@ -3,14 +3,15 @@
 os=rhel
 major=9
 minor=5
-vmname=$os$major$minor\iso-$(date +%s)
+vmname=vm-$(date +%s)
 cpunum=4
 memnum=4096
+dsknum=10
 imgpath=/var/lib/libvirt/images
 isopath=$imgpath/$os-$major.$minor-x86_64-dvd.iso
-diskpath=$imgpath/$vmname.qcow2,size=10
+diskpath=$imgpath/$vmname.qcow2,size=$dsknum
 ksfile=dvdinstall.ks
-kspath=ksdir/$ksfile
+kspath=${PWD}/$ksfile
 
 virt-install \
     --name $vmname \
@@ -19,6 +20,5 @@ virt-install \
     --location $isopath \
     --disk $diskpath \
     --initrd-inject $kspath \
-    --extra-args inst.ks="file:/$ksfile console=tty0 console=ttyS0,115200" \
-    --osinfo $os$major.$minor \
-    --nographics 
+    --extra-args inst.ks="file:/$ksfile" \
+    --osinfo $os$major.$minor
